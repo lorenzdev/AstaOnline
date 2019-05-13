@@ -21,13 +21,13 @@ di informazioni personali come nome,cognome, numero di cell, data di nascita, in
 residenza.
 Gli oggetti all’asta sono composti da una tipologia (strumenti musicali, automobili, appartamenti,
 etc.), prezzo, un nome, una descrizione, una data, l’e-mail dell’autore che ha inserito l’oggetto.
-Il Server offre tre servizi ai Client:
-1. Permette ad un nuovo utente di iscriversi inviando i propri dati al Server che procede a
-memorizzarli nella propria banca dati.
-2. Gli utenti iscritti, dopo essersi loggati inviando la propria e-mail e password di accesso,
-possono richiedere l’elenco degli oggetti all’asta indicando la tipologia a cui si è interessati.
-3. Gli utenti iscritti possono, inoltre, partecipare all’asta di un determinato oggetto inserendo il
-suo identificativo;.
+Il Server offre tre servizi ai Client:  
+**1.** Permette ad un nuovo utente di iscriversi inviando i propri dati al Server che procede a
+memorizzarli nella propria banca dati.  
+**2.** Gli utenti iscritti, dopo essersi loggati inviando la propria e-mail e password di accesso,
+possono richiedere l’elenco degli oggetti all’asta indicando la tipologia a cui si è interessati.   
+**3.** Gli utenti iscritti possono, inoltre, partecipare all’asta di un determinato oggetto inserendo il
+suo identificativo;  
 Gli oggetti all’asta mostrati all’utente, devono essere visualizzate secondo l’ordine di inserimento,
 dalla meno recente alla più recente, comprensivo del numero corrente di partecipanti all’asta su
 quell’oggetto.  
@@ -46,22 +46,26 @@ ascolto.*
 ### Usage
 
 Prima operazione da effettuare è ottenere il progetto dal repository lanciando il seguente comando dalla bash di git
-```bash
+```
 git clone https://github.com/lorenzdev/AstaOnline.git
 ```
 Successivamente lanciare i seguenti comandi per ottenere le modifiche:
 
-```bash
+```
 git pull origin master
 ```
 
 e per pubblicare le proprie modifiche:
 
-```bash
-git add .
-git commit -m "descrizione del commit"
-git push origin master
 ```
+git add .
+```  
+```
+git commit -m "descrizione del commit"  
+```  
+```
+git push origin master  
+```  
 
 ### Consegna
 31/05/2019
