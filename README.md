@@ -4,9 +4,9 @@
 
 ### Gruppo 3
 
-Fontanini
-Levrini  
-Gherardi
+Fontanini  
+Levrini    
+Gherardi  
 
 ### Docente
 
