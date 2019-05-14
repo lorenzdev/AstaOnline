@@ -4,9 +4,9 @@
 
 ### Gruppo 3
 
-Nome e cognome  
-Nome e cognome  
-Nome e cognome  
+Fontanini
+Levrini  
+Gherardi
 
 ### Docente
 
