@@ -50,7 +50,9 @@ public class Client {
                      System.out.println("inserire l'email");
                      String email=scanner.nextLine();  
                      System.out.println("inserire la password");
-                     String pass=scanner.nextLine();  
+                     String pass=scanner.nextLine();
+                     System.out.println("inseririmento dati personali");
+                     System.out.println("inserisci la citta di residenza");
                              
                  }
                  else
