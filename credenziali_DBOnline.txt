@@ -1,0 +1,2 @@
+Datdabase Host	               Database Name	Database Username	Database Password	
+sql7.freemysqlhosting.net	sql7292605	sql7292605		xqKBv2cAvM

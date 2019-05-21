@@ -57,7 +57,7 @@ CREATE TABLE `utente` (
   `e-mail` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `id_utente` varchar(10) NOT NULL,
-  `città_residenza` varchar(10) NOT NULL,
+  `citta_residenza` varchar(10) NOT NULL,
   `indirizzo` varchar(20) NOT NULL,
   `data_nascita` date NOT NULL,
   `nr_cell` int(15) NOT NULL,
