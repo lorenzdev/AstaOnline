@@ -35,7 +35,7 @@ public class DBConnection {
            Class.forName(DB_DRV);
            connection=DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWD);
            statement=connection.createStatement();
-           
+            
            // EFFETTUO UNA SELECT
            DBConnection.viewRows();
            
