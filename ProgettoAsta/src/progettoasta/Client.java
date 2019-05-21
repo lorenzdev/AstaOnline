@@ -67,7 +67,24 @@ public class Client {
                 boolean risp=true;
                          if(risp=true)
                          {
+                             System.out.println("inserire la tipologia degli oggetti a cui si è interessati");
+                             String tipogg=scanner.nextLine();
                              
+                             System.out.println("vuole partecipare a un'asta?");          
+                             String partecipazione  = in.readLine();
+                             if(partecipazione=="si")
+                             {
+                                 boolean b=true;
+                                  while(b=true)
+                                  {    
+                                  System.out.println("inserire il proprio nominativo: "); 
+                                  String nominativo=scanner.nextLine();
+                                  System.out.println("inserire l'oggeto a cui si è interessati "); 
+                                  String ogg=scanner.nextLine();
+                                  //if oggetto o nominativo diverso dai dati nel database richiede il nominativo 
+                                  // o l'oggetto,oppure scrivere 0 per uscire
+                                  }
+                             }
                          }
                  
 
