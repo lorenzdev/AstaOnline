@@ -23,7 +23,7 @@ public class ServerAsta {
     static Connection connection = null;
     static Statement statement = null;
     static String xmlString=null;
-    static Document doc=null;
+    public static Document doc=null;
     
     private static void updateXML(){
         try{
@@ -92,15 +92,7 @@ public class ServerAsta {
         
         try{
             updateXML();
-                System.out.println(xmlString);
-            
-        //Parser che produce l'oggetto dell'albero DOM (Document Object Model) dal contenuto XML
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-         
-        //Definisco un oggetto di tipo DocumentBuilder che fa da API per ottenere l'istanza del DOM
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        
-        //CREA STRINGA CON XML
+         System.out.println(xmlString);
         
             ServerSocket socket = new ServerSocket(port);
             
@@ -112,8 +104,8 @@ public class ServerAsta {
                 Socket client = socket.accept();
                 
 
-               // ThreadClient newConnect = new ThreadClient (client, treni, doc);
-               // newConnect.start();
+                Clientthread newConnect = new Clientthread (client, doc);
+                newConnect.start();
                 
             }
             

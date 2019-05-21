@@ -4,19 +4,22 @@ package progettoasta;
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import org.w3c.dom.Document;
 
 
-public class clientthread extends Thread{
+public class Clientthread extends Thread{
+    
+            
     
     Socket client;
     BufferedReader in;
     PrintWriter out;
-    ArrayList<ArrayList<String>> forno;
+    Document doc=null;
     
+    public Clientthread(Socket client,Document doc){
     
-    public clientthread(Socket client, ArrayList<ArrayList<String>> forno){
         this.client = client;
-        this.forno = forno;
+        this.doc = doc;
     }
 
    
@@ -27,19 +30,9 @@ public class clientthread extends Thread{
 
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())), true);
-            boolean bol=false;
-            String prodotto=in.readLine();
-            for(int i=0; i<forno.size(); i++)
-            {
-            ArrayList<String> prod = forno.get(i);
-            if(prod.get(0).equals(prodotto)){
-                bol=true;
-                out.println("prezzo: "+prod.get(1));
-            }
-            }
-            if(bol==false){
-                out.println("prodotto non esistente");
-            }
+           
+            String email=in.readLine();
+            
             in.close();
             out.close();
             client.close();
