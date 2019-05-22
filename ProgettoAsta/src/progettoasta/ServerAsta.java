@@ -23,7 +23,7 @@ public class ServerAsta {
     static Connection connection = null;
     static Statement statement = null;
     static String xmlString=null;
-    public static Document doc=null;
+    public static Document doc;
     
     private static void updateXML(){
         try{
