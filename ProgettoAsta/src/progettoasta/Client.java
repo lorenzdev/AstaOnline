@@ -44,24 +44,89 @@ public class Client {
             if(a=false)
             {
                  System.out.println("si deve registrare?");          
-                 String registrazione = in.readLine();
+                 String registrazione = scanner.nextLine();
+                 out.println(registrazione);
                  if(registrazione=="si")
-                 {
+                     
+                   
+                {   
+                    boolean regg=true;
+                    
+                    while(regg=true)
+                    {
                      System.out.println("inserire l'email");
                      String email=scanner.nextLine();  
+                     out.println(email);
                      System.out.println("inserire la password");
                      String pass=scanner.nextLine();
+                     out.println(pass);
                      System.out.println("inseririmento dati personali");
                      System.out.println("inserisci la citta di residenza");
-                             
+                     String citta_residenza=scanner.nextLine();
+                     out.println(citta_residenza);
+                      System.out.println("inserisci l'indirizzo");
+                     String indirizzo=scanner.nextLine();
+                     out.println(indirizzo);
+                      System.out.println("inserisci la data di nascita");
+                     String data_nascita=scanner.nextLine();
+                     out.println(data_nascita);
+                      System.out.println("inserisci il numero cellulare");
+                     String nr_cell=scanner.nextLine();
+                     out.println(nr_cell);
+                      System.out.println("inserisci il nome");
+                     String nome=scanner.nextLine();
+                     out.println(nome);
+                      System.out.println("inserisci il cognome");
+                     String cognome=scanner.nextLine();
+                     out.println(cognome);
+                        String reg=in.readLine();
+                        if(reg=="false")
+                        {
+                            out.println("email gia usata,reinserire i dati");
+                            regg=true;
+                        }
+                        else
+                        {
+                             out.println("registrazione eseguita con successo");
+                             regg=false;        ;
+                        }    
+                    }
+                     
+                    
+                  
+                     
                  }
                  else
                  {
-                     System.out.println("login");
-                     System.out.println("inserire l'email");
-                     String email=scanner.nextLine(); 
-                     System.out.println("inserire la password");
-                      String pass=scanner.nextLine();
+                     
+                    boolean logg=true;
+                    
+                    while(logg=true)
+                    { System.out.println("login");
+                      System.out.println("inserire l'email");
+                      String email_log=scanner.nextLine();
+                      out.println(email_log);
+                      System.out.println("inserire la password");
+                      String pass_log=scanner.nextLine();
+                      out.println(pass_log);
+                      String pass=in.readLine();
+                      String email=in.readLine();
+                        if(pass=="false")
+                        {
+                            out.println("password sbagliata,riprovare");
+                            logg=true;
+                        }
+                        if(email=="false")
+                        {
+                            out.println("email sbagliata sbagliata,riprovare");
+                            logg=true;
+                        }
+                        if(pass=="true" && email=="true")
+                        {
+                            out.println("login eseguito con successo");
+                            logg=false;
+                        }
+                    }
                  }  
                  
                 boolean risp=true;
@@ -69,9 +134,11 @@ public class Client {
                          {
                              System.out.println("inserire la tipologia degli oggetti a cui si è interessati");
                              String tipogg=scanner.nextLine();
+                             out.println(tipogg);
                              
                              System.out.println("vuole partecipare a un'asta?");          
-                             String partecipazione  = in.readLine();
+                             String partecipazione  = scanner.nextLine();
+                             out.println(partecipazione);
                              if(partecipazione=="si")
                              {
                                  boolean b=true;
@@ -79,8 +146,10 @@ public class Client {
                                   {    
                                   System.out.println("inserire il proprio nominativo: "); 
                                   String nominativo=scanner.nextLine();
+                                  out.println(nominativo);
                                   System.out.println("inserire l'oggeto a cui si è interessati "); 
                                   String ogg=scanner.nextLine();
+                                  out.println(ogg);
                                   //if oggetto o nominativo diverso dai dati nel database richiede il nominativo 
                                   // o l'oggetto,oppure scrivere 0 per uscire
                                   }
