@@ -40,14 +40,12 @@ public class ServerAsta {
             PreparedStatement selectOggetti = connection.prepareStatement("SELECT * FROM oggetto");
             ResultSet oggetti=selectOggetti.executeQuery();
             
-            //select registrazione
-            PreparedStatement selectRegi = connection.prepareStatement("SELECT * FROM registrazione");
-            ResultSet registrazioni=selectRegi.executeQuery();
+ 
             
         xmlString="<progetto><utenti>";
             while(utenti.next()){
                 xmlString=xmlString+"<utente>"+"<e-mail>"+utenti.getString("e-mail")+"</e-mail>"+
-                        "<pass>"+utenti.getString("pass")+"</pass>"+"<id_utente>"+utenti.getString("id_utente")+"</id_utente>"+
+                        "<pass>"+utenti.getString("password")+"</pass>"+"<id_utente>"+utenti.getString("id_utente")+"</id_utente>"+
                         "<citta_residenza>"+utenti.getString("citta_residenza")+"</citta_residenza>"+
                         "<indirizzo>"+utenti.getString("indirizzo")+"</indirizzo>"+
                         "<data_nascita>"+utenti.getString("data_nascita")+"</data_nascita>"+
@@ -57,14 +55,14 @@ public class ServerAsta {
             }
             xmlString=xmlString+"</utenti><oggetti>";
             
-            while(utenti.next()){
+            while(oggetti.next()){
                 String id=oggetti.getString("id_oggetto");
                 xmlString=xmlString+"<oggetto id=\""+id+"\">"+"<tipologia>"+oggetti.getString("tipologia")+"</tipologia>"+
                         "<prezzo>"+oggetti.getString("prezzo")+"</prezzo>"+"<nome>"+oggetti.getString("nome")+"</nome>"+
-                        "<descrizione>"+utenti.getString("descrizione")+"</descrizione>"+
-                        "<data>"+utenti.getString("data")+"</data>"+
-                        "<e-mail_autore>"+utenti.getString("e-mail_autore")+"</e-mail_autore>";
-                 PreparedStatement query = connection.prepareStatement("SELECT id_utente FROM registrazione WHERE id_oggetto="+id);
+                        "<descrizione>"+oggetti.getString("descrizione")+"</descrizione>"+
+                        "<data>"+oggetti.getString("data")+"</data>"+
+                        "<e-mail_autore>"+oggetti.getString("e-mail_autore")+"</e-mail_autore>";
+                 PreparedStatement query = connection.prepareStatement("SELECT id_utente FROM registrazione WHERE id_oggetto= \""+id+"\" ");
                  ResultSet result= query.executeQuery();
                  xmlString=xmlString+"<partecipanti>";
                  while(result.next()){
@@ -85,13 +83,15 @@ public class ServerAsta {
         catch(Exception ex){
             ex.printStackTrace();
         }
+        
+        
   
     }
   
     public static void main(String[] args) {
         
         try{
-            updateXML();
+         updateXML();
          System.out.println(xmlString);
         
             ServerSocket socket = new ServerSocket(port);
@@ -104,7 +104,7 @@ public class ServerAsta {
                 Socket client = socket.accept();
                 
 
-                Clientthread newConnect = new Clientthread (client, doc);
+                Clientthread newConnect = new Clientthread (client);
                 newConnect.start();
                 
             }
@@ -113,5 +113,7 @@ public class ServerAsta {
             ex.printStackTrace();
         }
     }
+    
+
     
 }

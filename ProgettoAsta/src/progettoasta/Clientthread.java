@@ -19,11 +19,13 @@ public class Clientthread extends Thread{
     PrintWriter out;
     ServerAsta server;
     
-    public Clientthread(Socket client,Document doc){
+    public Clientthread(Socket client){
     
         this.client = client;
         
     }
+
+  
     
     private void registrazione(String email, String pass, String citta_residenza, String indirizzo, String data_nascita, String nr_cell, String nome,String cognome){
         try{
@@ -33,11 +35,10 @@ public class Clientthread extends Thread{
                Node root = server.doc.getFirstChild();
                
                NodeList tmpUtenti = ((Element)server.doc.getFirstChild()).getElementsByTagName("utente");
-               
+               Element utenti=(Element) server.doc.getElementById("utenti");
           for(int i = 0;i < tmpUtenti.getLength();i++){
 
             Node utente = tmpUtenti.item(i);
-
             if(utente.getNodeType() == Node.ELEMENT_NODE) {
                Element el = (Element)utente;
                
@@ -74,26 +75,36 @@ public class Clientthread extends Thread{
 
             if(utente.getNodeType() == Node.ELEMENT_NODE) {
                Element el = (Element)utente;
-               
-              if((Integer.parseInt(el.getElementsByTagName("id_utente").item(0).getTextContent()))>idMax){
+               if(!el.getElementsByTagName("id_utente").item(0).getTextContent().isEmpty())
+               {
+                   
+                 if((Integer.parseInt(el.getElementsByTagName("id_utente").item(0).getTextContent()))>idMax){
                   idMax=Integer.parseInt(el.getElementsByTagName("id_utente").item(0).getTextContent());
-              }
+              }       
+               }
+              
                
               }
           }
-               
+
                Element newId=server.doc.createElement("id_utente");
-               newId.setTextContent("");
+               newId.setTextContent(Integer.toString(idMax+1));
                
                newUtente.appendChild(newEmail);
                newUtente.appendChild(newPass);
-               // utente append id
+               newUtente.appendChild(newId);
                newUtente.appendChild(newCitta);
                newUtente.appendChild(newIndirizzo);
                newUtente.appendChild(newDatan);
                newUtente.appendChild(newCell);
                newUtente.appendChild(newNome);
                newUtente.appendChild(newCognome);
+               
+               utenti.appendChild(newUtente);
+               
+          }else{
+              out.println("false");
+              
           }
                
                
