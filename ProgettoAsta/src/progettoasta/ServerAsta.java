@@ -11,6 +11,9 @@ import java.sql.Statement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class ServerAsta {
@@ -79,6 +82,8 @@ public class ServerAsta {
         DocumentBuilder builder = factory.newDocumentBuilder();
         //creo doc xml
        doc = builder.parse(new InputSource(new StringReader(xmlString)));
+       
+               
         }
         catch(Exception ex){
             ex.printStackTrace();

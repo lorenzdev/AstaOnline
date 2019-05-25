@@ -4,10 +4,15 @@ package progettoasta;
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import static progettoasta.ServerAsta.doc;
 
 
 public class Clientthread extends Thread{
@@ -34,11 +39,14 @@ public class Clientthread extends Thread{
             
                Node root = server.doc.getFirstChild();
                
-               NodeList tmpUtenti = ((Element)server.doc.getFirstChild()).getElementsByTagName("utente");
-               Element utenti=(Element) server.doc.getElementById("utenti");
-          for(int i = 0;i < tmpUtenti.getLength();i++){
+               NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
+              Node nodeUtenti=nodeListUtenti.item(0);
+              NodeList utenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
+              
+               System.out.println(utenti.getLength());
+          for(int i = 0;i < utenti.getLength();i++){
 
-            Node utente = tmpUtenti.item(i);
+            Node utente = utenti.item(i);
             if(utente.getNodeType() == Node.ELEMENT_NODE) {
                Element el = (Element)utente;
                
@@ -69,9 +77,9 @@ public class Clientthread extends Thread{
                newCognome.setTextContent(cognome);
                
                //id dell'utente
-               for(int i = 0;i < tmpUtenti.getLength();i++){
+               for(int i = 0;i < utenti.getLength();i++){
 
-            Node utente = tmpUtenti.item(i);
+            Node utente = utenti.item(i);
 
             if(utente.getNodeType() == Node.ELEMENT_NODE) {
                Element el = (Element)utente;
@@ -100,8 +108,15 @@ public class Clientthread extends Thread{
                newUtente.appendChild(newNome);
                newUtente.appendChild(newCognome);
                
-               utenti.appendChild(newUtente);
-               
+                nodeUtenti.appendChild(newUtente);
+               out.println("true");
+                DOMSource domSource = new DOMSource(doc);
+       StringWriter writer = new StringWriter();
+       StreamResult result = new StreamResult(writer);
+       TransformerFactory tf = TransformerFactory.newInstance();
+       Transformer transformer = tf.newTransformer();
+       transformer.transform(domSource, result);
+       System.out.println(writer.toString()); 
           }else{
               out.println("false");
               
@@ -129,6 +144,8 @@ public class Clientthread extends Thread{
             String nr_cell=in.readLine();
             String nome=in.readLine();
             String cognome=in.readLine();
+            
+            registrazione(email, pass, citta_residenza, indrizzo, data_nascita, nr_cell, nome, cognome);
             
             in.close();
             out.close();

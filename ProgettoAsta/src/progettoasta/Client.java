@@ -43,8 +43,8 @@ public class Client {
            
                  System.out.println("si deve registrare?");          
                  String registrazione = scanner.nextLine();
-                 out.println(registrazione);
-                 if(registrazione=="si")
+                
+                 if(registrazione.equals("si"))
                      
                    
                 {   
@@ -78,7 +78,7 @@ public class Client {
                      String cognome=scanner.nextLine();
                      out.println(cognome);
                         String reg=in.readLine();
-                        if(reg=="false")
+                        if(reg.equals("false"))
                         {
                             out.println("email gia usata,reinserire i dati");
                             regg=true;
