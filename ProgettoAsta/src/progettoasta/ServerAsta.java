@@ -11,6 +11,9 @@ import java.sql.Statement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class ServerAsta {
@@ -113,5 +116,41 @@ public class ServerAsta {
             ex.printStackTrace();
         }
     }
+    public static void UpdateDB(){
+        try{ // CREO LA CONNESSIONE AL DATABASE
+            Class.forName(DB_DRV);
+            connection=DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWD);
+            statement=connection.createStatement();
+           statement.executeUpdate("use sql7292605;");
+           NodeList tmpUtenti = ((Element)doc.getFirstChild()).getElementsByTagName("utente");
+           int c=0;
+           
+           PreparedStatement selectUtente = connection.prepareStatement("SELECT e-mail FROM utente");
+            ResultSet utenti=selectUtente.executeQuery();
+             while(utenti.next())
+             {
+                 
+                 c++;
+             }
+           //SCORRO GLI UTENTI
+           for(int i = 0;i < tmpUtenti.getLength();i++)
+           {
+           
+            Element el=(Element)tmpUtenti.item(i);
+            
+           
+            for(int j=0;j<c;j++)
+            if(el.getElementsByTagName("up").item(8).getTextContent()!=""){
+                
+            
+            }
+           }
+           
+        }
+        catch(){
+            
+        }
+    
+}
     
 }
