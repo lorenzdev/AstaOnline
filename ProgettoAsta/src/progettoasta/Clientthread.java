@@ -17,6 +17,7 @@ public class Clientthread extends Thread{
     BufferedReader in;
     PrintWriter out;
     ServerAsta server;
+    String reRegistrazione="";
     
     public Clientthread(Socket client){
     
@@ -26,6 +27,7 @@ public class Clientthread extends Thread{
     
     private void login(){
         try{
+
             String email=in.readLine();
             String pass=in.readLine();
             boolean emailTrovata=false;
@@ -186,7 +188,9 @@ public class Clientthread extends Thread{
             if(scelta.equals("si")){
                 
                 //il client si registra
+                while(!reRegistrazione.equals("finito")){
                 registrazione();
+                }
             
             }else{
                 

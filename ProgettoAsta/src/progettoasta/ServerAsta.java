@@ -35,6 +35,7 @@ public class ServerAsta {
             connection=DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWD);
             statement=connection.createStatement();
            statement.executeUpdate("use sql7292605;");
+
             //select utenti
             PreparedStatement selectUtente = connection.prepareStatement("SELECT * FROM utente");
             ResultSet utenti=selectUtente.executeQuery();

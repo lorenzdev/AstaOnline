@@ -43,7 +43,7 @@ public class Client {
            
                  System.out.println("si deve registrare?");          
                  String registrazione = scanner.nextLine();
-                
+                out.println(registrazione);
                  if(registrazione.equals("si"))
                      
                    
