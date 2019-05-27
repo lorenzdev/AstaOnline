@@ -43,8 +43,7 @@ public class ServerAsta {
             //select oggetti
             PreparedStatement selectOggetti = connection.prepareStatement("SELECT * FROM oggetto");
             ResultSet oggetti=selectOggetti.executeQuery();
-            
- 
+
             
         xmlString="<progetto><utenti>";
             while(utenti.next()){
@@ -118,7 +117,17 @@ public class ServerAsta {
         }catch(Exception ex){
             ex.printStackTrace();
         }
+        
+        finally{
+           try{connection.close();
+           }catch(Exception ex){
+            ex.printStackTrace();
+           }
+           
+        }
     }
+    
+    
     private static void UpdateDB(){
      try{
         int c=0;
