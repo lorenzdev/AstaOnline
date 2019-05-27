@@ -87,7 +87,7 @@ public class Client {
                         else
                         {
                              out.println("registrazione eseguita con successo");
-                             regg=false;        ;
+                             regg=false;        
                         }    
                     }
                    }  
