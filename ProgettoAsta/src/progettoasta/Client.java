@@ -43,7 +43,7 @@ public class Client {
            
                  System.out.println("si deve registrare?");          
                  String registrazione = scanner.nextLine();
-                
+                out.println(registrazione);
                  if(registrazione.equals("si"))
                      
                    
@@ -86,7 +86,7 @@ public class Client {
                         else
                         {
                              out.println("registrazione eseguita con successo");
-                             regg=false;        ;
+                             regg=false;        
                         }    
                     }
                    }  
@@ -107,22 +107,21 @@ public class Client {
                       System.out.println("inserire la password");
                       String pass_log=scanner.nextLine();
                       out.println(pass_log);
-                      String pass=in.readLine();
-                      String email=in.readLine();
-                        if(pass=="false")
+                      
+                      String log=in.readLine();
+                     
+                        if(log.equals("false"))
                         {
-                            out.println("password sbagliata,riprovare");
+                            out.println("login sbagliato,riprovare");
                             logg=true;
+                            
                         }
-                        if(email=="false")
-                        {
-                            out.println("email sbagliata sbagliata,riprovare");
-                            logg=true;
-                        }
-                        if(pass=="true" && email=="true")
-                        {
+                       
+                        else{                        
                             out.println("login eseguito con successo");
                             logg=false;
+                            String riuscita="finito";
+                            out.println(riuscita);
                         }
                     }
                  }  
@@ -142,7 +141,7 @@ public class Client {
                                 System.out.println(oggetti);
                                 if(oggetti.equals("0"))
                                 astaOggetti=false;
-                                    astaOggetti=false;
+                                    
                                 
                              }                                }
                                  
@@ -156,7 +155,7 @@ public class Client {
                              System.out.println("vuole partecipare a un'asta?");          
                              String partecipazione  = scanner.nextLine();
                              out.println(partecipazione);
-                             if(partecipazione=="si")
+                             if(partecipazione.equals("si"))
                              {
                                  boolean b=true;
                                   while(b=true)
@@ -165,7 +164,7 @@ public class Client {
                                   String nominativo=scanner.nextLine();
                                   out.println(nominativo);
                                   String nom=in.readLine();
-                                  if(nom=="false"){
+                                  if(nom.equals("false")){
                                       System.out.println("nominativo errato,reinserirlo: ");
                                        String nominativo2=scanner.nextLine();
                                        out.println(nominativo2);
@@ -182,7 +181,7 @@ public class Client {
                                   String ogg=scanner.nextLine();
                                   out.println(ogg);
                                   String oggetto=in.readLine();
-                                  if(oggetto=="false"){
+                                  if(oggetto.equals("false")){
                                       System.out.println("oggetto non presente,reinserirlo  ");
                                        String oggetto2=scanner.nextLine();
                                        out.println(oggetto2);
