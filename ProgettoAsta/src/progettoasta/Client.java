@@ -43,7 +43,6 @@ public class Client {
            
                  System.out.println("si deve registrare?");          
                  String registrazione = scanner.nextLine();
-                 out.println(registrazione);
                 
                  if(registrazione.equals("si"))
                      
@@ -108,15 +107,19 @@ public class Client {
                       System.out.println("inserire la password");
                       String pass_log=scanner.nextLine();
                       out.println(pass_log);
-                      String log=in.readLine();
-                      
-                        if(log.equals("false"))
+                      String pass=in.readLine();
+                      String email=in.readLine();
+                        if(pass.equals("false"))
                         {
-                            out.println("login errato,riprovare");
+                            out.println("password sbagliata,riprovare");
                             logg=true;
                         }
-                       
-                        else
+                        if(email.equals("false"))
+                        {
+                            out.println("email sbagliata sbagliata,riprovare");
+                            logg=true;
+                        }
+                        if(pass.equals("true") && email.equals("true"))
                         {
                             out.println("login eseguito con successo");
                             logg=false;
