@@ -118,7 +118,39 @@ public class ServerAsta {
             ex.printStackTrace();
         }
     }
+    private static void UpdateDB(){
+     try{
+        int c=0;
+    PreparedStatement selectUtente = connection.prepareStatement("SELECT * FROM utente");
+    ResultSet utenti=selectUtente.executeQuery();
+    Node root = doc.getFirstChild();
+               
+               NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
+              NodeList XMLutenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
+    while(utenti.next())
+    {
+        c++;
+    }
+    //scorro gli utenti
+    for(int i=0;i<XMLutenti.getLength();i++)
+    {
+        Element el;
+            el = (Element)XMLutenti.item(i);
+        for(int j=0;j<c;j++)
+        {
+            if(!el.getElementsByTagName("e-mail").item(0).getTextContent().equals(utenti.getString("e-mail")))
+            {
+                  String query = "INSERT INTO utenti (e-mail,password,citta_residenza,indirizzo,data_nascita,nr_cell,nome,cognome)VALUES"+ "('"+el.getElementsByTagName("e-mail").item(0).getTextContent()+"','"+el.getElementsByTagName("password").item(0).getTextContent()+"','"+el.getElementsByTagName("citta_residenza").item(0).getTextContent()+"','"+el.getElementsByTagName("indirizzo").item(0).getTextContent()+"','"+el.getElementsByTagName("data_nascita").item(0).getTextContent()+"','"+el.getElementsByTagName("nr_cell").item(0).getTextContent()+"','"+el.getElementsByTagName("nome").item(0).getTextContent()+"','"+el.getElementsByTagName("cognome").item(0).getTextContent()+"')";
+            }
+        }
+    }
+}
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
     
 
     
+}
 }
