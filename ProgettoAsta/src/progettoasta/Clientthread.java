@@ -3,16 +3,10 @@ package progettoasta;
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import static progettoasta.ServerAsta.doc;
+
 
 
 public class Clientthread extends Thread{
@@ -29,17 +23,64 @@ public class Clientthread extends Thread{
         this.client = client;
         
     }
-
+    
+    private void login(){
+        try{
+            String email=in.readLine();
+            String pass=in.readLine();
+            boolean emailTrovata=false;
+            boolean passTrovata=false;
+            
+            Node root = server.doc.getFirstChild();
+               
+            NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
+            NodeList utenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
+            
+            for(int i=0;i<utenti.getLength();i++){
+                Element utente=(Element)utenti.item(i);
+                
+                if(utente.getElementsByTagName("e-mail").item(0).getTextContent().equals(email)){
+                    emailTrovata=true;
+                    
+                    if(utente.getElementsByTagName("pass").item(0).getTextContent().equals(pass)){
+                    passTrovata=true;
+                }
+                }
+                if(passTrovata==true && emailTrovata==true){
+                    
+                    out.println("true");
+                    break;
+                }
+                out.println("false");
+                
+            }
+            
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    
+    }
   
     
-    private void registrazione(String email, String pass, String citta_residenza, String indirizzo, String data_nascita, String nr_cell, String nome,String cognome){
+    private void registrazione(){
         try{
+            
+            String email=in.readLine();
+            String pass=in.readLine();
+            String citta_residenza=in.readLine();
+            String indirizzo=in.readLine();
+            String data_nascita=in.readLine();
+            String nr_cell=in.readLine();
+            String nome=in.readLine();
+            String cognome=in.readLine();
+            
             int idMax=0;
             boolean trovato=false;
             
                Node root = server.doc.getFirstChild();
                
-               NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
+              NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
               Node nodeUtenti=nodeListUtenti.item(0);
               NodeList utenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
               
@@ -110,13 +151,16 @@ public class Clientthread extends Thread{
                
                 nodeUtenti.appendChild(newUtente);
                out.println("true");
-                DOMSource domSource = new DOMSource(doc);
+               
+            /* stampa xml  
+               DOMSource domSource = new DOMSource(doc);
        StringWriter writer = new StringWriter();
        StreamResult result = new StreamResult(writer);
        TransformerFactory tf = TransformerFactory.newInstance();
        Transformer transformer = tf.newTransformer();
        transformer.transform(domSource, result);
-       System.out.println(writer.toString()); 
+       System.out.println(writer.toString()); */
+            
           }else{
               out.println("false");
               
@@ -136,17 +180,19 @@ public class Clientthread extends Thread{
 
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())), true);
-            String email=in.readLine();
-            String pass=in.readLine();
-            String citta_residenza=in.readLine();
-            String indrizzo=in.readLine();
-            String data_nascita=in.readLine();
-            String nr_cell=in.readLine();
-            String nome=in.readLine();
-            String cognome=in.readLine();
             
-            registrazione(email, pass, citta_residenza, indrizzo, data_nascita, nr_cell, nome, cognome);
+            String scelta=in.readLine();
             
+            if(scelta.equals("si")){
+                
+                //il client si registra
+                registrazione();
+            
+            }else{
+                
+                login();
+                
+            }
             in.close();
             out.close();
             client.close();
