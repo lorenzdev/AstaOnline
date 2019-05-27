@@ -107,22 +107,21 @@ public class Client {
                       System.out.println("inserire la password");
                       String pass_log=scanner.nextLine();
                       out.println(pass_log);
-                      String pass=in.readLine();
-                      String email=in.readLine();
-                        if(pass.equals("false"))
+                      
+                      String log=in.readLine();
+                     
+                        if(log.equals("false"))
                         {
-                            out.println("password sbagliata,riprovare");
+                            out.println("login sbagliato,riprovare");
                             logg=true;
+                            
                         }
-                        if(email.equals("false"))
-                        {
-                            out.println("email sbagliata sbagliata,riprovare");
-                            logg=true;
-                        }
-                        if(pass.equals("true") && email.equals("true"))
-                        {
+                       
+                        else{                        
                             out.println("login eseguito con successo");
                             logg=false;
+                            String riuscita="finito";
+                            out.println(riuscita);
                         }
                     }
                  }  
