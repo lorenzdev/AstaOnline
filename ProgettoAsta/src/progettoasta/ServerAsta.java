@@ -19,7 +19,7 @@ import org.xml.sax.InputSource;
 public class ServerAsta {
 
     private static int port = 1234; 
-     static final String DB_URL = "jdbc:mysql://remotemysql.com:3306";
+     static final String DB_URL = "jdbc:mysql://remotemysql.com:3306?autoReconnect=true&useSSL=false";
     static final String DB_DRV = "com.mysql.jdbc.Driver";
     static final String DB_USER = "Q9BJUnWnNN";
     static final String DB_PASSWD = "6R1G8VK4nd";
