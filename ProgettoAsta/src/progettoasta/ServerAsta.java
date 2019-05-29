@@ -19,10 +19,10 @@ import org.xml.sax.InputSource;
 public class ServerAsta {
 
     private static int port = 1234; 
-     static final String DB_URL = "jdbc:mysql://sql7.freemysqlhosting.net";
+     static final String DB_URL = "jdbc:mysql://remotemysql.com:3306";
     static final String DB_DRV = "com.mysql.jdbc.Driver";
-    static final String DB_USER = "sql7292605";
-    static final String DB_PASSWD = "xqKBv2cAvM";
+    static final String DB_USER = "Q9BJUnWnNN";
+    static final String DB_PASSWD = "6R1G8VK4nd";
     static Connection connection = null;
     static Statement statement = null;
     static String xmlString=null;
