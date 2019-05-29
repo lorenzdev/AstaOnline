@@ -30,6 +30,20 @@ public class Clientthread extends Thread{
         
     }
     
+      private void registrazioneAsta(){
+          try{
+              String tipologia=in.readLine();
+              
+               Node root = server.doc.getFirstChild();
+               
+            NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
+            NodeList utenti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
+              
+          }catch(Exception e){
+            e.printStackTrace();
+        }
+      }
+    
     private void login(){
         try{
 
@@ -123,6 +137,8 @@ public class Clientthread extends Thread{
                newNome.setTextContent(nome);
                Element newCognome = server.doc.createElement("cognome");
                newCognome.setTextContent(cognome);
+               Element newUpdate = server.doc.createElement("update");
+               newUpdate.setTextContent("up");
                
                //id dell'utente
                for(int i = 0;i < utenti.getLength();i++){
@@ -155,6 +171,7 @@ public class Clientthread extends Thread{
                newUtente.appendChild(newCell);
                newUtente.appendChild(newNome);
                newUtente.appendChild(newCognome);
+               newUtente.appendChild(newUpdate);
                
                 nodeUtenti.appendChild(newUtente);
                out.println("true");
@@ -202,6 +219,7 @@ public class Clientthread extends Thread{
                 while(!reLogin.equals("finito")){
                 login();
                 }
+                registrazioneAsta();
             }
             in.close();
             out.close();

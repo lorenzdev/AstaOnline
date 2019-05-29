@@ -54,7 +54,7 @@ public class ServerAsta {
                         "<data_nascita>"+utenti.getString("data_nascita")+"</data_nascita>"+
                         "<nr_cell>"+utenti.getString("nr_cell")+"</nr_cell>"+
                         "<nome>"+utenti.getString("nome")+"</nome>"+
-                        "<cognome>"+utenti.getString("cognome")+"</cognome>"+"</utente>";
+                        "<cognome>"+utenti.getString("cognome")+"</cognome>"+"<update></update></utente>";
             }
             xmlString=xmlString+"</utenti><oggetti>";
             
