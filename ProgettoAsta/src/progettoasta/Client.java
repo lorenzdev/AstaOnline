@@ -114,7 +114,8 @@ public class Client {
                         {
                             out.println("login sbagliato,riprovare");
                             logg=true;
-                            
+                            String nonriuscita="non finito";
+                            out.println(nonriuscita);
                         }
                        
                         else{                        
