@@ -50,7 +50,7 @@ public class Client {
                 {   
                     boolean regg=true;
                     
-                    while(regg=true)
+                    while(regg==true)
                     {
                      System.out.println("inserire l'email");
                      String email=scanner.nextLine();  
@@ -132,14 +132,14 @@ public class Client {
                  }  
                  
                 boolean risp=true;
-                         if(risp=true)
+                         if(risp==true)
                          {
                              System.out.println("inserire la tipologia degli oggetti a cui si è interessati");
                              String tipogg=scanner.nextLine();
                              out.println(tipogg);
                             
                              boolean astaOggetti=true;
-                             while(astaOggetti=true)
+                             while(astaOggetti==true)
                              {
                                 String  oggetti=in.readLine();
                                 System.out.println("elenco deggli oggetti: ");
@@ -163,7 +163,7 @@ public class Client {
                              if(partecipazione.equals("si"))
                              {
                                  boolean b=true;
-                                  while(b=true)
+                                  while(b==true)
                                   {    
                                   System.out.println("inserire il proprio nominativo: "); 
                                   String nominativo=scanner.nextLine();
@@ -180,7 +180,7 @@ public class Client {
                                   
                                   }
                                   boolean c=true;
-                                  while(c=true)
+                                  while(c==true)
                                   {    
                                   System.out.println("inserire l'oggeto a cui si è interessati "); 
                                   String ogg=scanner.nextLine();
