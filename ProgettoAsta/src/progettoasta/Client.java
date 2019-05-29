@@ -82,11 +82,15 @@ public class Client {
                         {
                             out.println("email gia usata,reinserire i dati");
                             regg=true;
+                             String nonriuscita="non finito";
+                             out.println(nonriuscita);
                         }
                         else
                         {
                              out.println("registrazione eseguita con successo");
-                             regg=false;        
+                             regg=false;
+                              String riuscita="finito";
+                               out.println(riuscita);
                         }    
                     }
                    }  
