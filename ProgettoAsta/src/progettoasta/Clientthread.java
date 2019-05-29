@@ -96,6 +96,7 @@ public class Clientthread extends Thread{
                 }
                 if(passTrovata==true && emailTrovata==true){
                     reLogin="finito";
+                    loginTrovato=true;
                     out.println("true");
                     break;
                 }else{
