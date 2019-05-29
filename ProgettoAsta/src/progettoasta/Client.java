@@ -98,7 +98,7 @@ public class Client {
                   
                      
                  
-                 else
+                 
                  {
                      
                     boolean logg=true;
@@ -134,7 +134,14 @@ public class Client {
                 boolean risp=true;
                          if(risp==true)
                          {
+                             System.out.println("premi asterisco se vuoi visualizzare tutti gli oggetti");
+                                 String asterisco=scanner.nextLine();
+                                 if(asterisco.equals("*"))
+                                 {
+                                     String visogg=in.readLine();
+                                 }
                              System.out.println("inserire la tipologia degli oggetti a cui si è interessati");
+                               
                              String tipogg=scanner.nextLine();
                              out.println(tipogg);
                             

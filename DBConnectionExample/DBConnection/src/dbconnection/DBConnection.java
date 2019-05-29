@@ -5,6 +5,8 @@
  */
 package dbconnection;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,7 +32,7 @@ public class DBConnection {
         
             
         try{
-            
+         
            // CREO LA CONNESSIONE AL DATABASE
            Class.forName(DB_DRV);
            connection=DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWD);
@@ -100,7 +102,7 @@ public class DBConnection {
     
     public static void insertRow(){
         
-        String email = "maurizio.buoni@gmail.com";
+        String email = in.readline();
         String nome = "Maurizio";
         String cognome = "Buoni";
         String indirizzo = "via dell Repubblica, 5";

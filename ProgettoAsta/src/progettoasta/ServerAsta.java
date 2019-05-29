@@ -152,7 +152,10 @@ public class ServerAsta {
         {
             if(!el.getElementsByTagName("e-mail").item(0).getTextContent().equals(utenti.getString("e-mail")))
             {
+                String email=in.readline();
                   String query = "INSERT INTO utenti (e-mail,password,citta_residenza,indirizzo,data_nascita,nr_cell,nome,cognome)VALUES"+ "('"+el.getElementsByTagName("e-mail").item(0).getTextContent()+"','"+el.getElementsByTagName("password").item(0).getTextContent()+"','"+el.getElementsByTagName("citta_residenza").item(0).getTextContent()+"','"+el.getElementsByTagName("indirizzo").item(0).getTextContent()+"','"+el.getElementsByTagName("data_nascita").item(0).getTextContent()+"','"+el.getElementsByTagName("nr_cell").item(0).getTextContent()+"','"+el.getElementsByTagName("nome").item(0).getTextContent()+"','"+el.getElementsByTagName("cognome").item(0).getTextContent()+"')";
+                    PreparedStatement ins = connection.prepareStatement(query);
+                    ins.executeUpdate();
             }
         }
     }
