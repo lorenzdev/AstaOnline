@@ -34,7 +34,7 @@ public class ServerAsta {
             Class.forName(DB_DRV);
             connection=DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWD);
             statement=connection.createStatement();
-           statement.executeUpdate("use sql7292605;");
+           statement.executeUpdate("use Q9BJUnWnNN;");
 
             //select utenti
             PreparedStatement selectUtente = connection.prepareStatement("SELECT * FROM utente");
