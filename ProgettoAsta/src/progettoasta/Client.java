@@ -99,7 +99,7 @@ public class Client {
                      
                     boolean logg=true;
                     
-                    while(logg=true)
+                    while(logg==true)
                     { System.out.println("login");
                       System.out.println("inserire l'email");
                       String email_log=scanner.nextLine();
@@ -118,7 +118,7 @@ public class Client {
                         }
                        
                         else{                        
-                            out.println("login eseguito con successo");
+                            System.out.println("login eseguito con successo");
                             logg=false;
                             String riuscita="finito";
                             out.println(riuscita);
