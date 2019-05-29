@@ -119,7 +119,9 @@ public class ServerAsta {
         }
         
         finally{
-           try{connection.close();
+           try{UpdateDB();
+               connection.close();
+           
            }catch(Exception ex){
             ex.printStackTrace();
            }
