@@ -148,15 +148,11 @@ public class ServerAsta {
     {
         Element el;
             el = (Element)XMLutenti.item(i);
-        for(int j=0;j<c;j++)
+        if(el.getElementsByTagName("update").item(8).getTextContent().equals("up"))
         {
-            if(!el.getElementsByTagName("e-mail").item(0).getTextContent().equals(utenti.getString("e-mail")))
-            {
-                
-                  String query = "INSERT INTO utenti (e-mail,password,citta_residenza,indirizzo,data_nascita,nr_cell,nome,cognome)VALUES"+ "('"+el.getElementsByTagName("e-mail").item(0).getTextContent()+"','"+el.getElementsByTagName("password").item(0).getTextContent()+"','"+el.getElementsByTagName("citta_residenza").item(0).getTextContent()+"','"+el.getElementsByTagName("indirizzo").item(0).getTextContent()+"','"+el.getElementsByTagName("data_nascita").item(0).getTextContent()+"','"+el.getElementsByTagName("nr_cell").item(0).getTextContent()+"','"+el.getElementsByTagName("nome").item(0).getTextContent()+"','"+el.getElementsByTagName("cognome").item(0).getTextContent()+"')";
-                    PreparedStatement ins = connection.prepareStatement(query);
-                    ins.executeUpdate();
-            }
+             String query = "INSERT INTO utenti (e-mail,password,citta_residenza,indirizzo,data_nascita,nr_cell,nome,cognome)VALUES"+ "('"+el.getElementsByTagName("e-mail").item(0).getTextContent()+"','"+el.getElementsByTagName("password").item(0).getTextContent()+"','"+el.getElementsByTagName("citta_residenza").item(0).getTextContent()+"','"+el.getElementsByTagName("indirizzo").item(0).getTextContent()+"','"+el.getElementsByTagName("data_nascita").item(0).getTextContent()+"','"+el.getElementsByTagName("nr_cell").item(0).getTextContent()+"','"+el.getElementsByTagName("nome").item(0).getTextContent()+"','"+el.getElementsByTagName("cognome").item(0).getTextContent()+"')";
+             PreparedStatement ins = connection.prepareStatement(query);
+             ins.executeUpdate();      
         }
     }
 }
