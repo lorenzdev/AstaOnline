@@ -55,12 +55,12 @@ public class Clientthread extends Thread{
                    
                     Element el =(Element) oggetti.item(i);
                     if(el.getElementsByTagName("tipologia").item(0).getTextContent().equals(tipologia)){
-                    risposta=risposta+"\n id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
-                            "\n tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
-                            "\n prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
-                            "\n nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
-                            "\n data: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            "\n email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
+                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                            " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            " email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
                     }
                 }
                 out.println(risposta);
