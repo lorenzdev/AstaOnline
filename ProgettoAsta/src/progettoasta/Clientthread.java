@@ -33,12 +33,24 @@ public class Clientthread extends Thread{
       private void registrazioneAsta(){
           try{
               String tipologia=in.readLine();
-              
+              String risposta="oggetti: ";
                Node root = server.doc.getFirstChild();
                
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
-            NodeList utenti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
+            NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
               
+            if(tipologia.equals("*")){
+                for(int i=0; i<oggetti.getLength(); i++){
+                    Element el =(Element) oggetti.item(i);
+                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto")+
+                            "\n tipologia: "+el.getElementsByTagName("tipologia")+
+                            "\n prezzo: "+el.getElementsByTagName("prezzo")+
+                            "\n nome: "+el.getElementsByTagName("nome")+
+                            "\n data: "+el.getElementsByTagName("data")+
+                            "\n email autore: "+el.getElementsByTagName("e-mail_autore");
+                }
+            }
+            
           }catch(Exception e){
             e.printStackTrace();
         }
