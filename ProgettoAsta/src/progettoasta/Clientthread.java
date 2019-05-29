@@ -35,32 +35,32 @@ public class Clientthread extends Thread{
               String tipologia=in.readLine();
               String risposta="oggetti: ";
                Node root = server.doc.getFirstChild();
-               
+                
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
               
             if(tipologia.equals("*")){
                 for(int i=0; i<oggetti.getLength(); i++){
-                    Element el =(Element) oggetti.item(i);
-                    risposta=risposta+"\n id oggetto: "+el.getElementsByTagName("id_oggetto")+
-                            "\n tipologia: "+el.getElementsByTagName("tipologia")+
-                            "\n prezzo: "+el.getElementsByTagName("prezzo")+
-                            "\n nome: "+el.getElementsByTagName("nome")+
-                            "\n data: "+el.getElementsByTagName("data")+
-                            "\n email autore: "+el.getElementsByTagName("e-mail_autore");
+                    Element el =(Element)oggetti.item(i);
+                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                            " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            " email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
                 }
                 out.println(risposta);
             }else{
                 for(int i=0; i<oggetti.getLength(); i++){
                    
                     Element el =(Element) oggetti.item(i);
-                    if(el.equals(tipologia)){
-                    risposta=risposta+"\n id oggetto: "+el.getElementsByTagName("id_oggetto")+
-                            "\n tipologia: "+el.getElementsByTagName("tipologia")+
-                            "\n prezzo: "+el.getElementsByTagName("prezzo")+
-                            "\n nome: "+el.getElementsByTagName("nome")+
-                            "\n data: "+el.getElementsByTagName("data")+
-                            "\n email autore: "+el.getElementsByTagName("e-mail_autore");
+                    if(el.getElementsByTagName("tipologia").item(0).getTextContent().equals(tipologia)){
+                    risposta=risposta+"\n id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                            "\n tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            "\n prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            "\n nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            "\n data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            "\n email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
                     }
                 }
                 out.println(risposta);
