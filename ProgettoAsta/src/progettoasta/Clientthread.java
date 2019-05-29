@@ -3,9 +3,14 @@ package progettoasta;
 
 import java.net.*;
 import java.io.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import static progettoasta.ServerAsta.doc;
 
 
 
@@ -18,7 +23,7 @@ public class Clientthread extends Thread{
     PrintWriter out;
     ServerAsta server;
     String reRegistrazione="";
-    
+    String reLogin="";
     public Clientthread(Socket client){
     
         this.client = client;
@@ -56,7 +61,7 @@ public class Clientthread extends Thread{
                 out.println("false");
                 
             }
-            
+           reLogin=in.readLine();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -86,7 +91,7 @@ public class Clientthread extends Thread{
               Node nodeUtenti=nodeListUtenti.item(0);
               NodeList utenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
               
-               System.out.println(utenti.getLength());
+            
           for(int i = 0;i < utenti.getLength();i++){
 
             Node utente = utenti.item(i);
@@ -154,21 +159,22 @@ public class Clientthread extends Thread{
                 nodeUtenti.appendChild(newUtente);
                out.println("true");
                
-            /* stampa xml  
+            //stampa xml per vedere aggiornametni
                DOMSource domSource = new DOMSource(doc);
        StringWriter writer = new StringWriter();
        StreamResult result = new StreamResult(writer);
        TransformerFactory tf = TransformerFactory.newInstance();
        Transformer transformer = tf.newTransformer();
        transformer.transform(domSource, result);
-       System.out.println(writer.toString()); */
+       System.out.println(writer.toString());
             
           }else{
               out.println("false");
               
           }
                
-               
+           reRegistrazione=in.readLine();
+           
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -193,9 +199,9 @@ public class Clientthread extends Thread{
                 }
             
             }else{
-                
+                while(!reLogin.equals("finito")){
                 login();
-                
+                }
             }
             in.close();
             out.close();
