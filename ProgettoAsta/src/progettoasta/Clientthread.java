@@ -73,7 +73,7 @@ public class Clientthread extends Thread{
     
     private void login(){
         try{
-
+            boolean loginTrovato=false;
             String email=in.readLine();
             String pass=in.readLine();
             boolean emailTrovata=false;
@@ -95,14 +95,18 @@ public class Clientthread extends Thread{
                 }
                 }
                 if(passTrovata==true && emailTrovata==true){
-                    
+                    reLogin="finito";
                     out.println("true");
                     break;
-                }
-                out.println("false");
-                
+                }else{
+                    loginTrovato=false;}
             }
-           reLogin=in.readLine();
+            
+           if(loginTrovato==false){
+               
+               reLogin="riprova";
+               out.println("false");
+           }
         }
         catch(Exception e){
             e.printStackTrace();
@@ -201,6 +205,8 @@ public class Clientthread extends Thread{
                newUtente.appendChild(newUpdate);
                
                 nodeUtenti.appendChild(newUtente);
+                
+                reRegistrazione="finito";
                out.println("true");
                
             //stampa xml per vedere aggiornametni
@@ -213,11 +219,12 @@ public class Clientthread extends Thread{
        System.out.println(writer.toString());
             
           }else{
+              reRegistrazione="riprova";
               out.println("false");
               
           }
                
-           reRegistrazione=in.readLine();
+           
            
         }catch(Exception e){
             e.printStackTrace();
@@ -245,6 +252,7 @@ public class Clientthread extends Thread{
             }else{
                 while(!reLogin.equals("finito")){
                 login();
+                
                 }
                 registrazioneAsta();
             }

@@ -80,17 +80,15 @@ public class Client {
                         String reg=in.readLine();
                         if(reg.equals("false"))
                         {
-                            out.println("email gia usata,reinserire i dati");
+                            System.out.println("email gia usata,reinserire i dati");
                             regg=true;
-                             String nonriuscita="non finito";
-                             out.println(nonriuscita);
+                         
                         }
                         else
                         {
-                             out.println("registrazione eseguita con successo");
+                             System.out.println("registrazione eseguita con successo");
                              regg=false;
-                              String riuscita="finito";
-                               out.println(riuscita);
+                              
                         }    
                     }
                    }  
@@ -118,15 +116,13 @@ public class Client {
                         {
                             System.out.println("login sbagliato,riprovare");
                             logg=true;
-                            String nonriuscita="non finito";
-                            out.println(nonriuscita);
+                            
                         }
                        
                         else{                        
                             System.out.println("login eseguito con successo");
                             logg=false;
-                            String riuscita="finito";
-                            out.println(riuscita);
+                            
                         }
                     }
                  }  
