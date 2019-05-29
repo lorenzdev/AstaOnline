@@ -131,39 +131,16 @@ public class Client {
                     }
                  }  
                  
-                boolean risp=true;
-                         if(risp==true)
-                         {
-                             System.out.println("premi asterisco se vuoi visualizzare tutti gli oggetti");
-                                 String asterisco=scanner.nextLine();
-                                 if(asterisco.equals("*"))
-                                 {
-                                     String visogg=in.readLine();
-                                 }
-                             System.out.println("inserire la tipologia degli oggetti a cui si è interessati");
+                
+                         
+                             System.out.println("inserire la tipologia degli oggetti a cui si è interessati (inserisci asterisco se vuoi visualizzare tutti gli oggetti)");
                                
                              String tipogg=scanner.nextLine();
                              out.println(tipogg);
-                            
-                             boolean astaOggetti=true;
-                             while(astaOggetti==true)
-                             {
-                                String  oggetti=in.readLine();
-                                System.out.println("elenco deggli oggetti: ");
-                                System.out.println(oggetti);
-                                if(oggetti.equals("0"))
-                                astaOggetti=false;
-                                    
-                                
-                             }                                }
-                                 
-                                 
-                                 
-                                 
-                                 
-                             
-                            
-                             
+                             String risposta=in.readLine();
+                            System.out.println(risposta);
+                                                           
+   
                              System.out.println("vuole partecipare a un'asta?");          
                              String partecipazione  = scanner.nextLine();
                              out.println(partecipazione);

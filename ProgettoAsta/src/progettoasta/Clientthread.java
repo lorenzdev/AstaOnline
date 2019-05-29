@@ -42,13 +42,28 @@ public class Clientthread extends Thread{
             if(tipologia.equals("*")){
                 for(int i=0; i<oggetti.getLength(); i++){
                     Element el =(Element) oggetti.item(i);
-                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto")+
+                    risposta=risposta+"\n id oggetto: "+el.getElementsByTagName("id_oggetto")+
                             "\n tipologia: "+el.getElementsByTagName("tipologia")+
                             "\n prezzo: "+el.getElementsByTagName("prezzo")+
                             "\n nome: "+el.getElementsByTagName("nome")+
                             "\n data: "+el.getElementsByTagName("data")+
                             "\n email autore: "+el.getElementsByTagName("e-mail_autore");
                 }
+                out.println(risposta);
+            }else{
+                for(int i=0; i<oggetti.getLength(); i++){
+                   
+                    Element el =(Element) oggetti.item(i);
+                    if(el.equals(tipologia)){
+                    risposta=risposta+"\n id oggetto: "+el.getElementsByTagName("id_oggetto")+
+                            "\n tipologia: "+el.getElementsByTagName("tipologia")+
+                            "\n prezzo: "+el.getElementsByTagName("prezzo")+
+                            "\n nome: "+el.getElementsByTagName("nome")+
+                            "\n data: "+el.getElementsByTagName("data")+
+                            "\n email autore: "+el.getElementsByTagName("e-mail_autore");
+                    }
+                }
+                out.println(risposta);
             }
             
           }catch(Exception e){
