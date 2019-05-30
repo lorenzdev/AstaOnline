@@ -30,7 +30,7 @@ public class Clientthread extends Thread{
         
     }
     
-      private void registrazioneAsta(){
+      private void visualizzaAsta(){
           try{
               String tipologia=in.readLine();
               String risposta="oggetti: ";
@@ -38,7 +38,7 @@ public class Clientthread extends Thread{
                 
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
-              
+              System.out.println(oggetti.getLength());
             if(tipologia.equals("*")){
                 for(int i=0; i<oggetti.getLength(); i++){
                     Element el =(Element)oggetti.item(i);
@@ -244,8 +244,7 @@ public class Clientthread extends Thread{
             String scelta=in.readLine();
             
             if(scelta.equals("si")){
-                
-                //il client si registra
+               
                 while(!reRegistrazione.equals("finito")){
                 registrazione();
                 }
@@ -253,9 +252,8 @@ public class Clientthread extends Thread{
             }else{
                 while(!reLogin.equals("finito")){
                 login();
-                
                 }
-                registrazioneAsta();
+                visualizzaAsta();
             }
             in.close();
             out.close();
