@@ -39,7 +39,7 @@ public class Clientthread extends Thread{
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
               System.out.println(oggetti.getLength());
-            if(tipologia.equals("*")){
+            if(tipologia.equals("tutto")){
                 for(int i=0; i<oggetti.getLength(); i++){
                     Element el =(Element)oggetti.item(i);
                     risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
