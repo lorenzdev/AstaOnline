@@ -42,12 +42,12 @@ public class Clientthread extends Thread{
             if(tipologia.equals("tutto")){
                 for(int i=0; i<oggetti.getLength(); i++){
                     Element el =(Element)oggetti.item(i);
-                    risposta=risposta+"|| ID OGGETTO: "+el.getAttribute("id")+
-                            " TIPOLOGIA: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
-                            " PREZZO: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
-                            " NOME: "+el.getElementsByTagName("nome").item(0).getTextContent()+
-                            " DATA: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            " EMAIL AUTORE: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
+                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                            " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            " email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
                 }
                 out.println(risposta);
             }else{
@@ -55,12 +55,12 @@ public class Clientthread extends Thread{
                    
                     Element el =(Element) oggetti.item(i);
                     if(el.getElementsByTagName("tipologia").item(0).getTextContent().equals(tipologia)){
-                     risposta=risposta+"|| ID OGGETTO: "+el.getAttribute("id")+
-                            " TIPOLOGIA: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
-                            " PREZZO: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
-                            " NOME: "+el.getElementsByTagName("nome").item(0).getTextContent()+
-                            " DATA: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            " EMAIL AUTORE: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
+                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                            " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            " email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
                     }
                 }
                 out.println(risposta);
