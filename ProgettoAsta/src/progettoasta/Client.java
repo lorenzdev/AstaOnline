@@ -41,7 +41,8 @@ public class Client {
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             
            
-                 System.out.println("si deve registrare?");          
+                 System.out.println("SI DEVE REGISTRARE?"); 
+                 
                  String registrazione = scanner.nextLine();
                 out.println(registrazione);
                  if(registrazione.equals("si"))
@@ -52,45 +53,54 @@ public class Client {
                     
                     while(regg==true)
                     {
-                     System.out.println("inserire l'email");
+                     System.out.println("//INSERIRE L'EMAIL//");
                      String email=scanner.nextLine();  
                      out.println(email);
-                     System.out.println("inserire la password");
+                     System.out.println("//INSERIRE LA PASSWORD//");
                      String pass=scanner.nextLine();
                      out.println(pass);
-                     System.out.println("inseririmento dati personali");
-                     System.out.println("inserisci la citta di residenza");
+                     System.out.println("*****************************");
+                     System.out.println("INSERIRE I DATI PERSONALI");
+                     System.out.println("*****************************");
+                     System.out.println("//inserisci la citta di residenza//");
                      String citta_residenza=scanner.nextLine();
                      out.println(citta_residenza);
-                      System.out.println("inserisci l'indirizzo");
+                      System.out.println("//INSERIRE L'INDIRIZZO//");
                      String indirizzo=scanner.nextLine();
                      out.println(indirizzo);
-                      System.out.println("inserisci la data di nascita");
+                      System.out.println("//INSERIRE LA DATA DI NASCITA//");
                      String data_nascita=scanner.nextLine();
                      out.println(data_nascita);
-                      System.out.println("inserisci il numero cellulare");
+                      System.out.println("//INSERIRE IL NUMERO DI CELLULARE//");
                      String nr_cell=scanner.nextLine();
                      out.println(nr_cell);
-                      System.out.println("inserisci il nome");
+                      System.out.println("//INSERIRE IL NOME//");
                      String nome=scanner.nextLine();
                      out.println(nome);
-                      System.out.println("inserisci il cognome");
+                      System.out.println("//INSERIRE IL COGNOME//");
                      String cognome=scanner.nextLine();
                      out.println(cognome);
                         String reg=in.readLine();
+                          
                         if(reg.equals("false"))
                         {
-                            System.out.println("email gia usata,reinserire i dati");
+                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                            System.out.println("EMAIL GIA USATA,REINSERIRE I DATI");
+                             System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             regg=true;
                          
                         }
                         else
                         {
-                             System.out.println("registrazione eseguita con successo");
+                             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                             System.out.println("REGISTRAZIONE ESEGUITA CON SUCCESSO");
                              regg=false;
+                              System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                               
                         }    
                     }
+                    
+                    
                    }  
           
                   
@@ -102,11 +112,13 @@ public class Client {
                     boolean logg=true;
                     
                     while(logg==true)
-                    { System.out.println("login");
-                      System.out.println("inserire l'email");
+                    {  System.out.println("__________________");
+                     System.out.println("LOGIN");
+                      
+                      System.out.println("//INSERIRE L'EMAIL//");
                       String email_log=scanner.nextLine();
                       out.println(email_log);
-                      System.out.println("inserire la password");
+                      System.out.println("//INSERIRE LA PASSWORD//");
                       String pass_log=scanner.nextLine();
                       out.println(pass_log);
                       
@@ -114,7 +126,9 @@ public class Client {
                      
                         if(log.equals("false"))
                         {
-                            System.out.println("login sbagliato,riprovare");
+                              System.out.println("*******************************************");
+                            System.out.println("PASSWORD O EMAIL SBAGLIATA,REINSERIRE I DATI:");
+                              System.out.println("********************************************");
                             logg=true;
                             
                         }
