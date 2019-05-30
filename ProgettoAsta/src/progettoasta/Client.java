@@ -143,7 +143,7 @@ public class Client {
                  
                 
                          
-                             System.out.println("inserire la tipologia degli oggetti a cui si è interessati (inserisci asterisco se vuoi visualizzare tutti gli oggetti)");
+                             System.out.println("inserire la tipologia degli oggetti a cui si è interessati (inserisci tutto se vuoi visualizzare tutti gli oggetti)");
                                
                              String tipogg=scanner.nextLine();
                              out.println(tipogg);

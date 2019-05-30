@@ -5,16 +5,22 @@
             <url>src/progettoasta/Client.java</url>
             <bookmark id="1">
                 <name/>
-                <line>88</line>
+                <line>87</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/User/Documents/GitHub/AstaOnline/ProgettoAsta/src/progettoasta/ServerAsta.java</file>
             <file>file:/C:/Users/User/Documents/GitHub/AstaOnline/ProgettoAsta/src/progettoasta/Clientthread.java</file>
             <file>file:/C:/Users/User/Documents/GitHub/AstaOnline/ProgettoAsta/src/progettoasta/Client.java</file>
+=======
+            <file>file:/C:/Users/emanu/Documents/GitHub/AstaOnline/ProgettoAsta/src/progettoasta/Client.java</file>
+            <file>file:/C:/Users/emanu/Documents/GitHub/AstaOnline/ProgettoAsta/src/progettoasta/Clientthread.java</file>
+            <file>file:/C:/Users/emanu/Documents/GitHub/AstaOnline/ProgettoAsta/src/progettoasta/ServerAsta.java</file>
+>>>>>>> 387bacfa170de9bf527f09dd33d70b1d6f6f6fe5
         </group>
     </open-files>
 </project-private>
