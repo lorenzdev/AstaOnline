@@ -21,7 +21,7 @@ public class Client {
     public Client(){
         
         try{
-            Scanner scanner = new Scanner(System.in);
+             Scanner scanner = new Scanner(System.in);
            
             
             System.out.println("Qual è l'indirizzo del server?");          

@@ -16,14 +16,15 @@ import static progettoasta.ServerAsta.doc;
 
 public class Clientthread extends Thread{
     
-            
-    
+   
     Socket client;
     BufferedReader in;
     PrintWriter out;
     ServerAsta server;
     String reRegistrazione="";
     String reLogin="";
+    String reRegAsta="";
+    String emailUtente;
     public Clientthread(Socket client){
     
         this.client = client;
@@ -70,7 +71,72 @@ public class Clientthread extends Thread{
             e.printStackTrace();
         }
       }
-    
+      
+     private void registrazioneAsta(){
+        try{
+            String scelta=in.readLine();
+            String nominativo;
+        if(scelta.equals("si")){
+          nominativo=in.readLine();
+           Node root = server.doc.getFirstChild();
+              
+            NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
+            NodeList nodeListPartecipanti=((Element)root).getElementsByTagName("partecipanti");
+            Node nodePartecipanti=nodeListPartecipanti.item(0);
+            NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
+            boolean riprovo=true;
+            for(int i =0 ;i <oggetti.getLength();i++){
+                Element el=(Element)oggetti.item(i);
+                if(el.getAttribute("oggetto_id").equals(nominativo)){
+                    Element newUtente=server.doc.createElement("utente");
+                    newUtente.setAttribute("id", trovaID());
+                    Element newUpdate=server.doc.createElement("update");
+                    newUpdate.setTextContent("up");
+                    newUtente.appendChild(newUpdate);
+                    nodePartecipanti.appendChild(newUtente);
+                   out.println("true");
+                   riprovo=false;
+                   break;
+                }
+            }
+            if(riprovo==true){
+                reRegAsta="riprova";
+            out.println("false");
+            }
+        }
+        
+        
+        
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        
+     }
+     
+     private String trovaID(){
+         try{
+               Node root = server.doc.getFirstChild();
+               
+            NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
+            NodeList utenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
+            
+            for(int i=0;i<utenti.getLength();i++){
+                Element utente=(Element)utenti.item(i);
+                if(utente.getElementsByTagName("e-mail").item(0).getTextContent().equals(emailUtente)){
+                    return (utente.getElementsByTagName("id_utente").item(0).getTextContent());
+                }
+            }
+          
+                    
+                
+         } catch(Exception e){
+            e.printStackTrace();
+        }
+        return "error";
+         
+     }
+     
     private void login(){
         try{
             boolean loginTrovato=false;
@@ -97,6 +163,7 @@ public class Clientthread extends Thread{
                 if(passTrovata==true && emailTrovata==true){
                     reLogin="finito";
                     loginTrovato=true;
+                    emailUtente=email;
                     out.println("true");
                     break;
                 }else{
@@ -254,6 +321,9 @@ public class Clientthread extends Thread{
                 login();
                 }
                 visualizzaAsta();
+                while(!reLogin.equals("finito")){
+                registrazioneAsta();
+                }
             }
             in.close();
             out.close();
