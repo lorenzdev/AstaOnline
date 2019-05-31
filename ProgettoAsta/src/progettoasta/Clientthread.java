@@ -3,6 +3,7 @@ package progettoasta;
 
 import java.net.*;
 import java.io.*;
+import java.sql.PreparedStatement;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -10,13 +11,15 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import static progettoasta.ServerAsta.connection;
 import static progettoasta.ServerAsta.doc;
 
 
 
 public class Clientthread extends Thread{
     
-   
+            
+    
     Socket client;
     BufferedReader in;
     PrintWriter out;
@@ -24,7 +27,9 @@ public class Clientthread extends Thread{
     String reRegistrazione="";
     String reLogin="";
     String reRegAsta="";
-    String emailUtente;
+    String emailUtente="";
+    String controllo="si";
+    
     public Clientthread(Socket client){
     
         this.client = client;
@@ -39,16 +44,16 @@ public class Clientthread extends Thread{
                 
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
-              System.out.println(oggetti.getLength());
+              
             if(tipologia.equals("tutto")){
                 for(int i=0; i<oggetti.getLength(); i++){
                     Element el =(Element)oggetti.item(i);
-                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                    risposta=risposta+" id oggetto: "+el.getAttribute("id")+
                             " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
                             " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
                             " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
                             " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            " email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
+                            " email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent();
                 }
                 out.println(risposta);
             }else{
@@ -56,12 +61,12 @@ public class Clientthread extends Thread{
                    
                     Element el =(Element) oggetti.item(i);
                     if(el.getElementsByTagName("tipologia").item(0).getTextContent().equals(tipologia)){
-                    risposta=risposta+" id oggetto: "+el.getElementsByTagName("id_oggetto").item(0).getTextContent()+
+                    risposta=risposta+" id oggetto: "+el.getAttribute("id")+
                             " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
                             " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
                             " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
                             " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            " email autore: "+el.getElementsByTagName("e-mail_autore").item(0).getTextContent();
+                            " email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent();
                     }
                 }
                 out.println(risposta);
@@ -87,7 +92,7 @@ public class Clientthread extends Thread{
             boolean riprovo=true;
             for(int i =0 ;i <oggetti.getLength();i++){
                 Element el=(Element)oggetti.item(i);
-                if(el.getAttribute("oggetto_id").equals(nominativo)){
+                if(el.getAttribute("id").equals(nominativo)){
                     Element newUtente=server.doc.createElement("utente");
                     newUtente.setAttribute("id", trovaID());
                     Element newUpdate=server.doc.createElement("update");
@@ -95,6 +100,7 @@ public class Clientthread extends Thread{
                     newUtente.appendChild(newUpdate);
                     nodePartecipanti.appendChild(newUtente);
                    out.println("true");
+                   reRegAsta="finito";
                    riprovo=false;
                    break;
                 }
@@ -114,7 +120,7 @@ public class Clientthread extends Thread{
         
      }
      
-     private String trovaID(){
+     private String trovaID() throws IOException{
          try{
                Node root = server.doc.getFirstChild();
                
@@ -123,7 +129,7 @@ public class Clientthread extends Thread{
             
             for(int i=0;i<utenti.getLength();i++){
                 Element utente=(Element)utenti.item(i);
-                if(utente.getElementsByTagName("e-mail").item(0).getTextContent().equals(emailUtente)){
+                if(utente.getElementsByTagName("email").item(0).getTextContent().equals(emailUtente)){
                     return (utente.getElementsByTagName("id_utente").item(0).getTextContent());
                 }
             }
@@ -133,7 +139,8 @@ public class Clientthread extends Thread{
          } catch(Exception e){
             e.printStackTrace();
         }
-        return "error";
+        
+        throw new IOException("errore utente non loggato");
          
      }
      
@@ -153,7 +160,7 @@ public class Clientthread extends Thread{
             for(int i=0;i<utenti.getLength();i++){
                 Element utente=(Element)utenti.item(i);
                 
-                if(utente.getElementsByTagName("e-mail").item(0).getTextContent().equals(email)){
+                if(utente.getElementsByTagName("email").item(0).getTextContent().equals(email)){
                     emailTrovata=true;
                     
                     if(utente.getElementsByTagName("pass").item(0).getTextContent().equals(pass)){
@@ -211,7 +218,7 @@ public class Clientthread extends Thread{
             if(utente.getNodeType() == Node.ELEMENT_NODE) {
                Element el = (Element)utente;
                
-              if(el.getElementsByTagName("e-mail").item(0).getTextContent().equals(email)){
+              if(el.getElementsByTagName("email").item(0).getTextContent().equals(email)){
                   trovato=true;
               }
                
@@ -220,7 +227,7 @@ public class Clientthread extends Thread{
           if(trovato==false){
                Element newUtente = server.doc.createElement("utente");
                
-               Element newEmail = server.doc.createElement("e-mail");
+               Element newEmail = server.doc.createElement("email");
                newEmail.setTextContent(pass);
                Element newPass = server.doc.createElement("pass");
                newPass.setTextContent(email);
@@ -278,6 +285,7 @@ public class Clientthread extends Thread{
                out.println("true");
                
             //stampa xml per vedere aggiornametni
+            System.out.println("\n  NUOVO UTENTE REGISTRATO");
                DOMSource domSource = new DOMSource(doc);
        StringWriter writer = new StringWriter();
        StreamResult result = new StreamResult(writer);
@@ -308,22 +316,57 @@ public class Clientthread extends Thread{
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())), true);
             
-            String scelta=in.readLine();
+
+              
+            while(controllo.equals("si")){
+                reLogin="";
+                reRegAsta="";
+                reRegistrazione="";
+                   String scelta=in.readLine();
+            int menu=Integer.parseInt(scelta);
+            switch(menu){
             
-            if(scelta.equals("si")){
-               
+                case 1:{
+                    
                 while(!reRegistrazione.equals("finito")){
                 registrazione();
                 }
-            
-            }else{
-                while(!reLogin.equals("finito")){
+                break;
+                }
+               
+           case 2:{
+               
+               while(!reLogin.equals("finito")){
                 login();
                 }
+               break;
+           }
+           
+           case 3:{
+               if(!emailUtente.equals(""))
+               {out.println("loggato");
                 visualizzaAsta();
-                while(!reLogin.equals("finito")){
+                while(!reRegAsta.equals("finito")){
                 registrazioneAsta();
                 }
+               }else{
+                   out.println("nonloggato");
+               }
+               break;
+           }
+            
+           case 4:{
+            updateDB();
+            in.close();
+            out.close();
+            client.close();
+            controllo="chiudi";
+            break;
+           }
+           
+           default: break;
+                
+            }
             }
             in.close();
             out.close();
@@ -334,4 +377,62 @@ public class Clientthread extends Thread{
         }
     }
     
+    
+    
+    
+    
+    
+      private void updateDB(){
+     try{
+    
+    Node root = server.doc.getFirstChild();
+               
+    NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
+    NodeList XMLutenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
+  
+    NodeList nodeListOgg=((Element)root).getElementsByTagName("oggetti");
+    NodeList nodeListOgetti = ((Element)nodeListOgg.item(0)).getElementsByTagName("oggetto");
+    
+   
+    
+    for(int i=0;i<XMLutenti.getLength();i++)
+    {
+        Element el;
+            el = (Element)XMLutenti.item(i);
+        if(el.getElementsByTagName("update").item(0).getTextContent().equals("up"))
+        {
+             String query = "INSERT INTO utente (email,password,id_utente,citta_residenza,indirizzo,data_nascita,nr_cell,nome,cognome)VALUES"+ "('"+el.getElementsByTagName("email").item(0).getTextContent()+"','"+el.getElementsByTagName("pass").item(0).getTextContent()+"','"+el.getElementsByTagName("id_utente").item(0).getTextContent()+"','"+el.getElementsByTagName("citta_residenza").item(0).getTextContent()+"','"+el.getElementsByTagName("indirizzo").item(0).getTextContent()+"','"+el.getElementsByTagName("data_nascita").item(0).getTextContent()+"','"+el.getElementsByTagName("nr_cell").item(0).getTextContent()+"','"+el.getElementsByTagName("nome").item(0).getTextContent()+"','"+el.getElementsByTagName("cognome").item(0).getTextContent()+"')";
+             PreparedStatement ins = server.connection.prepareStatement(query);
+             ins.executeUpdate();      
+        }
+    }
+    for(int j=0;j<nodeListOgetti.getLength();j++){
+        
+    NodeList nodeListPart=((Element)nodeListOgetti.item(j)).getElementsByTagName("partecipanti");
+    NodeList nodeListUtentiPartecipanti =((Element)nodeListPart.item(0)).getElementsByTagName("utente");
+    Element oggetto=(Element)nodeListOgetti.item(j);
+    for(int i=0; i<nodeListUtentiPartecipanti.getLength();i++){
+        Element el=(Element)nodeListUtentiPartecipanti.item(i);
+        
+         if(el.getElementsByTagName("update").item(0).getTextContent().equals("up"))
+        {
+            
+             String query = "INSERT INTO registrazione (id_utente,id_oggetto)VALUES"+ "('"+el.getAttribute("id")+"','"+oggetto.getAttribute("id")+"')";
+             PreparedStatement ins = server.connection.prepareStatement(query);
+             ins.executeUpdate();      
+        }
+    }
+    }
 }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    
+
+    
+}
+}
+
+    
+

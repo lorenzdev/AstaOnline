@@ -2,6 +2,7 @@ package progettoasta;
 
 
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.net.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -47,7 +52,7 @@ public class ServerAsta {
             
         xmlString="<progetto><utenti>";
             while(utenti.next()){
-                xmlString=xmlString+"<utente>"+"<e-mail>"+utenti.getString("e-mail")+"</e-mail>"+
+                xmlString=xmlString+"<utente>"+"<email>"+utenti.getString("email")+"</email>"+
                         "<pass>"+utenti.getString("password")+"</pass>"+"<id_utente>"+utenti.getString("id_utente")+"</id_utente>"+
                         "<citta_residenza>"+utenti.getString("citta_residenza")+"</citta_residenza>"+
                         "<indirizzo>"+utenti.getString("indirizzo")+"</indirizzo>"+
@@ -64,12 +69,12 @@ public class ServerAsta {
                         "<prezzo>"+oggetti.getString("prezzo")+"</prezzo>"+"<nome>"+oggetti.getString("nome")+"</nome>"+
                         "<descrizione>"+oggetti.getString("descrizione")+"</descrizione>"+
                         "<data>"+oggetti.getString("data")+"</data>"+
-                        "<e-mail_autore>"+oggetti.getString("e-mail_autore")+"</e-mail_autore>";
+                        "<email_autore>"+oggetti.getString("email_autore")+"</email_autore>";
                  PreparedStatement query = connection.prepareStatement("SELECT id_utente FROM registrazione WHERE id_oggetto= \""+id+"\" ");
                  ResultSet result= query.executeQuery();
                  xmlString=xmlString+"<partecipanti>";
                  while(result.next()){
-                     xmlString=xmlString+"<utente id=\""+result.getString("id_utente")+"\"/>";
+                     xmlString=xmlString+"<utente id=\""+result.getString("id_utente")+"\">"+"<update></update></utente>";
                  }
                  xmlString=xmlString+"</partecipanti></oggetto>";
             }
@@ -97,7 +102,14 @@ public class ServerAsta {
         
         try{
          updateXML();
-         System.out.println(xmlString);
+         
+       DOMSource domSource = new DOMSource(doc);
+       StringWriter writer = new StringWriter();
+       StreamResult result = new StreamResult(writer);
+       TransformerFactory tf = TransformerFactory.newInstance();
+       Transformer transformer = tf.newTransformer();
+       transformer.transform(domSource, result);
+       System.out.println(writer.toString());
         
             ServerSocket socket = new ServerSocket(port);
             
@@ -111,7 +123,8 @@ public class ServerAsta {
 
                 Clientthread newConnect = new Clientthread (client);
                 newConnect.start();
-                
+                System.out.println("\n...nuovo client collegato....");
+                System.out.println("ip : "+client.getInetAddress());
             }
             
         }catch(Exception ex){
@@ -119,7 +132,7 @@ public class ServerAsta {
         }
         
         finally{
-           try{UpdateDB();
+           try{
                connection.close();
            
            }catch(Exception ex){
@@ -130,38 +143,4 @@ public class ServerAsta {
     }
     
     
-    private static void UpdateDB(){
-     try{
-        int c=0;
-    PreparedStatement selectUtente = connection.prepareStatement("SELECT * FROM utente");
-    ResultSet utenti=selectUtente.executeQuery();
-    Node root = doc.getFirstChild();
-               
-               NodeList nodeListUtenti = ((Element)root).getElementsByTagName("utenti");
-              NodeList XMLutenti=((Element)nodeListUtenti.item(0)).getElementsByTagName("utente");
-    while(utenti.next())
-    {
-        c++;
-    }
-    //scorro gli utenti
-    for(int i=0;i<XMLutenti.getLength();i++)
-    {
-        Element el;
-            el = (Element)XMLutenti.item(i);
-        if(el.getElementsByTagName("update").item(8).getTextContent().equals("up"))
-        {
-             String query = "INSERT INTO utenti (e-mail,password,citta_residenza,indirizzo,data_nascita,nr_cell,nome,cognome)VALUES"+ "('"+el.getElementsByTagName("e-mail").item(0).getTextContent()+"','"+el.getElementsByTagName("password").item(0).getTextContent()+"','"+el.getElementsByTagName("citta_residenza").item(0).getTextContent()+"','"+el.getElementsByTagName("indirizzo").item(0).getTextContent()+"','"+el.getElementsByTagName("data_nascita").item(0).getTextContent()+"','"+el.getElementsByTagName("nr_cell").item(0).getTextContent()+"','"+el.getElementsByTagName("nome").item(0).getTextContent()+"','"+el.getElementsByTagName("cognome").item(0).getTextContent()+"')";
-             PreparedStatement ins = connection.prepareStatement(query);
-             ins.executeUpdate();      
-        }
-    }
-}
-        catch(Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    
-
-    
-}
 }

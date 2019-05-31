@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package progettoasta;
 
@@ -21,9 +16,8 @@ public class Client {
     public Client(){
         
         try{
-             Scanner scanner = new Scanner(System.in);
-           
-            
+            Scanner scanner = new Scanner(System.in);
+          /*  
             System.out.println("Qual è l'indirizzo del server?");          
             String address = scanner.nextLine();
 
@@ -31,28 +25,35 @@ public class Client {
             String porta = scanner.nextLine();
             
             int port = Integer.parseInt(porta);
-            
-            
-           
+*/
           
-            Socket client = new Socket(address, port);
+            Socket client = new Socket("127.0.0.1", 1234);
             
             PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.getOutputStream())), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            
-           
-                 System.out.println("SI DEVE REGISTRARE?"); 
+           String controllo = "si";
+                
                  
-                 String registrazione = scanner.nextLine();
-                out.println(registrazione);
-                 if(registrazione.equals("si"))
-                     
-                   
-                {   
+         
+                while(controllo.equals("si")){
+                System.out.println("1 REGISTRAZIONE \n2 LOGIN \n3 VISUALIZZA/REGISTRAZIONE ASTE \n4 ESCI"); 
+                int menu = Integer.parseInt(scanner.nextLine());
+                out.println(Integer.toString(menu));
+                
+                switch(menu){
+                    
+                    case 1:{   
                     boolean regg=true;
                     
                     while(regg==true)
-                    {
+                    {System.out.println("______________________________________________________");
+                    System.out.println("#####   #####   ####  ###  #### ##### #####      #    ##### ###   ###   ##  ### ##### \n" +
+" #   #   #  #  #   #   #  #   # # # #  #   #     #    #   #  #   #   #   ##  #   #  # \n" +
+" #   #   #    #        #  ##      #    #   #    # #      #   #  #     #  ##  #   #    \n" +
+" ####    ###  #        #   ###    #    ####     ###     #    #  #     #  # # #   ###  \n" +
+" #  #    #    #   ###  #     ##   #    #  #    #   #   #     #  #     #  # # #   #    \n" +
+" #   #   #  #  #   #   #  #   #   #    #   #   #   #  #   #  #   #   #   #  ##   #  # \n" +
+"###  ## #####   ####  ### ####   ###  ###  ## ### ### ##### ###   ###   ###  #  ##### ");
                      System.out.println("//INSERIRE L'EMAIL//");
                      String email=scanner.nextLine();  
                      out.println(email);
@@ -62,7 +63,7 @@ public class Client {
                      System.out.println("*****************************");
                      System.out.println("INSERIRE I DATI PERSONALI");
                      System.out.println("*****************************");
-                     System.out.println("//inserisci la citta di residenza//");
+                     System.out.println("//INSERISCI LA CITTA DI RESIDENZA//");
                      String citta_residenza=scanner.nextLine();
                      out.println(citta_residenza);
                       System.out.println("//INSERIRE L'INDIRIZZO//");
@@ -99,21 +100,21 @@ public class Client {
                               
                         }    
                     }
-                    
-                    
-                   }  
-          
-                  
-                     
-                 
-                 
-                 {
+                   break;}
+                        
+                    case 2: {
                      
                     boolean logg=true;
                     
                     while(logg==true)
-                    {  System.out.println("__________________");
-                     System.out.println("LOGIN");
+                    {  System.out.println("______________________________________________________");
+                     System.out.println("###     ###     ####  ### ##  ### \n" +
+" #     #   #   #   #   #   ##  #  \n" +
+" #    #     # #        #   ##  #  \n" +
+" #    #     # #        #   # # #  \n" +
+" #    #     # #   ###  #   # # #  \n" +
+" #  #  #   #   #   #   #   #  ##  \n" +
+"#####   ###     ####  ### ###  #  ");
                       
                       System.out.println("//INSERIRE L'EMAIL//");
                       String email_log=scanner.nextLine();
@@ -134,16 +135,21 @@ public class Client {
                         }
                        
                         else{                        
-                            System.out.println("login eseguito con successo");
-                            logg=false;
-                            
+                            System.out.println("*******************************************");
+                            System.out.println("LOGIN ESEGUITO CON SUCCESSO");
+                              System.out.println("********************************************");
+                          
+                            logg=false;  
                         }
                     }
-                 }  
-                 
-                
-                         
-                             System.out.println("inserire la tipologia degli oggetti a cui si è interessati (inserisci tutto se vuoi visualizzare tutti gli oggetti)");
+                    break;}
+                    
+                    case 3:{
+                        String loggato=in.readLine();
+                                
+                        if(loggato.equals("loggato")){
+                           
+                         System.out.println("//INSERIRE LA TIPOLOGIA DEGLI OGGETTI A CUI SI E' INTERESSATI (INSERISCI TUTTO SE VUOI VISUALIZZARE TUTTI GLI OGGETTI)//");
                                
                              String tipogg=scanner.nextLine();
                              out.println(tipogg);
@@ -151,54 +157,54 @@ public class Client {
                             System.out.println(risposta);
                                                            
    
-                             System.out.println("vuole partecipare a un'asta?");          
+                             System.out.println("//VUOLE PARTECIPARE A UN'ASTA?//");          
                              String partecipazione  = scanner.nextLine();
                              out.println(partecipazione);
                              if(partecipazione.equals("si"))
-                             {
-                                 boolean b=true;
-                                  while(b==true)
-                                  {    
-                                  System.out.println("inserire il proprio nominativo: "); 
-                                  String nominativo=scanner.nextLine();
-                                  out.println(nominativo);
-                                  String nom=in.readLine();
-                                  if(nom.equals("false")){
-                                      System.out.println("nominativo errato,reinserirlo: ");
-                                       String nominativo2=scanner.nextLine();
-                                       out.println(nominativo2);
-                                  }
-                                  else{
-                                      b=false;
-                                  }
-                                  
-                                  }
-                                  boolean c=true;
-                                  while(c==true)
-                                  {    
-                                  System.out.println("inserire l'oggeto a cui si è interessati "); 
-                                  String ogg=scanner.nextLine();
-                                  out.println(ogg);
-                                  String oggetto=in.readLine();
-                                  if(oggetto.equals("false")){
-                                      System.out.println("oggetto non presente,reinserirlo  ");
-                                       String oggetto2=scanner.nextLine();
-                                       out.println(oggetto2);
-                                  }
-                                  else{
-                                      c=false;
-                                  
-                                  
-                                  }
-                                  }
-                              }
-                 
-
-                
-            
-            
-          
-            client.close();
+                             {   boolean fine=false;
+                              System.out.println("//INSERISCI IDENTIFICATIVO DELL'OGGETTO (ID OGGETTO)//");  
+                                 while(fine==false)
+                                 {
+                                 String id  = scanner.nextLine();
+                             out.println(id);
+                             String conferma= in.readLine();
+                             if(conferma.equals("true")){
+                                 System.out.println("********************************************");
+                                  System.out.println("ISCRIZIONE ALL'ASTA ESEGUITA");  
+                                  System.out.println("********************************************");
+                                  fine=true;
+                             }else{
+                                 System.out.println("************************************************************************");
+                                 System.out.println("IDENTIFICATIVO SBAGLIATO, ISNERISCI IDENTIFICATIVO OGGETTO (ID OGGETTO)");  
+                                 System.out.println("**************************************************************************");
+                                  fine=false;
+                             }}
+                    }
+                        }else{
+                            System.out.println("*******************************************");
+                            System.out.println("EFFETTUARE PRIMA LOGIN");
+                            System.out.println("*******************************************");
+                        }
+                break;}  
+                    
+                    case 4: {
+                        System.out.println("*******************************************");
+                        System.out.println("CHIUSURA IN CORSO");
+                        System.out.println("*******************************************");
+                        client.close();
+                        controllo="chiudi";
+                        break;
+                    }
+                    
+                    default: {
+                        System.out.println("*******************************************");
+                        System.out.println("SERVIZIO NON DISPONIBILE");
+                        System.out.println("*******************************************");
+                        break;
+                    }
+                }
+                }
+   
         
             }catch(Exception ex){
             ex.printStackTrace();
