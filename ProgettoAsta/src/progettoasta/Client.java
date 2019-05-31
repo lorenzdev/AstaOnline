@@ -36,6 +36,7 @@ public class Client {
                  
          
                 while(controllo.equals("si")){
+                 
                 System.out.println("1 REGISTRAZIONE \n2 LOGIN \n3 VISUALIZZA/REGISTRAZIONE ASTE \n4 ESCI"); 
                 int menu = Integer.parseInt(scanner.nextLine());
                 out.println(Integer.toString(menu));
@@ -84,7 +85,7 @@ public class Client {
                         String reg=in.readLine();
                           
                         if(reg.equals("false"))
-                        {
+                        { 
                              System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                             System.out.println("EMAIL GIA USATA,REINSERIRE I DATI");
                              System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
@@ -92,7 +93,7 @@ public class Client {
                          
                         }
                         else
-                        {
+                        {  
                              System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                              System.out.println("REGISTRAZIONE ESEGUITA CON SUCCESSO");
                              regg=false;
@@ -127,6 +128,7 @@ public class Client {
                      
                         if(log.equals("false"))
                         {
+                       
                               System.out.println("*******************************************");
                             System.out.println("PASSWORD O EMAIL SBAGLIATA,REINSERIRE I DATI:");
                               System.out.println("********************************************");
@@ -134,7 +136,8 @@ public class Client {
                             
                         }
                        
-                        else{                        
+                        else{         
+                              
                             System.out.println("*******************************************");
                             System.out.println("LOGIN ESEGUITO CON SUCCESSO");
                               System.out.println("********************************************");
@@ -149,14 +152,16 @@ public class Client {
                                 
                         if(loggato.equals("loggato")){
                            
-                         System.out.println("//INSERIRE LA TIPOLOGIA DEGLI OGGETTI A CUI SI E' INTERESSATI (INSERISCI TUTTO SE VUOI VISUALIZZARE TUTTI GLI OGGETTI)//");
+                         System.out.println("//INSERIRE LA TIPOLOGIA DEGLI OGGETTI A CUI SI E' INTERESSATI (INSERISCI \" - \" SE VUOI VISUALIZZARE TUTTI GLI OGGETTI)//");
                                
                              String tipogg=scanner.nextLine();
                              out.println(tipogg);
                              String risposta=in.readLine();
-                            System.out.println(risposta);
-                                                           
-   
+                             while(!risposta.equals("000")){
+                                 System.out.println(risposta);
+                                 risposta=in.readLine();
+                             }
+                             
                              System.out.println("//VUOLE PARTECIPARE A UN'ASTA?//");          
                              String partecipazione  = scanner.nextLine();
                              out.println(partecipazione);
@@ -169,11 +174,14 @@ public class Client {
                              out.println(id);
                              String conferma= in.readLine();
                              if(conferma.equals("true")){
+                                 
+                        
                                  System.out.println("********************************************");
                                   System.out.println("ISCRIZIONE ALL'ASTA ESEGUITA");  
                                   System.out.println("********************************************");
                                   fine=true;
                              }else{
+                           
                                  System.out.println("************************************************************************");
                                  System.out.println("IDENTIFICATIVO SBAGLIATO, ISNERISCI IDENTIFICATIVO OGGETTO (ID OGGETTO)");  
                                  System.out.println("**************************************************************************");
@@ -181,6 +189,7 @@ public class Client {
                              }}
                     }
                         }else{
+                            
                             System.out.println("*******************************************");
                             System.out.println("EFFETTUARE PRIMA LOGIN");
                             System.out.println("*******************************************");
@@ -188,6 +197,8 @@ public class Client {
                 break;}  
                     
                     case 4: {
+                        
+                       
                         System.out.println("*******************************************");
                         System.out.println("CHIUSURA IN CORSO");
                         System.out.println("*******************************************");
@@ -197,6 +208,8 @@ public class Client {
                     }
                     
                     default: {
+                          
+                             
                         System.out.println("*******************************************");
                         System.out.println("SERVIZIO NON DISPONIBILE");
                         System.out.println("*******************************************");

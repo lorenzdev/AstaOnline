@@ -45,31 +45,31 @@ public class Clientthread extends Thread{
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
               
-            if(tipologia.equals("tutto")){
+            if(tipologia.equals("-")){
                 for(int i=0; i<oggetti.getLength(); i++){
                     Element el =(Element)oggetti.item(i);
-                    risposta=risposta+" id oggetto: "+el.getAttribute("id")+
-                            " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
-                            " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
-                            " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
-                            " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            " email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent();
+                    out.println("| id oggetto: "+el.getAttribute("id")+
+                            "| tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            "| prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            "| nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            "| data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            "| email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent());
                 }
-                out.println(risposta);
+                out.println("000");
             }else{
                 for(int i=0; i<oggetti.getLength(); i++){
                    
                     Element el =(Element) oggetti.item(i);
                     if(el.getElementsByTagName("tipologia").item(0).getTextContent().equals(tipologia)){
-                    risposta=risposta+" id oggetto: "+el.getAttribute("id")+
-                            " tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
-                            " prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
-                            " nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
-                            " data: "+el.getElementsByTagName("data").item(0).getTextContent()+
-                            " email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent();
+                  out.println("| id oggetto: "+el.getAttribute("id")+
+                            "| tipologia: "+el.getElementsByTagName("tipologia").item(0).getTextContent()+
+                            "| prezzo: "+el.getElementsByTagName("prezzo").item(0).getTextContent()+
+                            "| nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
+                            "| data: "+el.getElementsByTagName("data").item(0).getTextContent()+
+                            "| email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent());
                     }
                 }
-                out.println(risposta);
+                out.println("000");
             }
             
           }catch(Exception e){
