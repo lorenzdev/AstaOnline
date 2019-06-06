@@ -162,7 +162,7 @@ public class Client {
                                  risposta=in.readLine();
                              }
                              
-                             System.out.println("//VUOLE PARTECIPARE A UN'ASTA?//");          
+                             System.out.println("\n //VUOLE PARTECIPARE A UN'ASTA? (-SI- PER PARTECIPARE *QUALSIASI ALTRO CARATTERE* PER TORNARE AL MENU)//");          
                              String partecipazione  = scanner.nextLine();
                              out.println(partecipazione);
                              if(partecipazione.equals("si"))
@@ -182,9 +182,9 @@ public class Client {
                                   fine=true;
                              }else{
                            
-                                 System.out.println("************************************************************************");
-                                 System.out.println("IDENTIFICATIVO SBAGLIATO, ISNERISCI IDENTIFICATIVO OGGETTO (ID OGGETTO)");  
-                                 System.out.println("**************************************************************************");
+                                 System.out.println("******************************************************************************************");
+                                 System.out.println("IDENTIFICATIVO NON PRESENTE O GIA' ISCRITTO ALL'ASTA, ISNERISCI UN ATRO IDENTIFICATIVO OGGETTO (ID OGGETTO)");  
+                                 System.out.println("********************************************************************************************");
                                   fine=false;
                              }}
                     }

@@ -41,7 +41,7 @@ public class Clientthread extends Thread{
               String tipologia=in.readLine();
               String risposta="oggetti: ";
                Node root = server.doc.getFirstChild();
-                
+                boolean zeroOggetti=true;
             NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
               
@@ -54,7 +54,11 @@ public class Clientthread extends Thread{
                             "| nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
                             "| data: "+el.getElementsByTagName("data").item(0).getTextContent()+
                             "| email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent());
+                    zeroOggetti=false;
                 }
+                if(zeroOggetti==true){
+                        out.println("//NESSUN OGGETTO DI QUESTA TIPOLOGIA, PROSEGUI ALL'ISCRIZIONE//");
+                    }
                 out.println("000");
             }else{
                 for(int i=0; i<oggetti.getLength(); i++){
@@ -67,8 +71,12 @@ public class Clientthread extends Thread{
                             "| nome: "+el.getElementsByTagName("nome").item(0).getTextContent()+
                             "| data: "+el.getElementsByTagName("data").item(0).getTextContent()+
                             "| email autore: "+el.getElementsByTagName("email_autore").item(0).getTextContent());
+                  zeroOggetti=false;
                     }
                 }
+                if(zeroOggetti==true){
+                        out.println("//NESSUN OGGETTO DI QUESTA TIPOLOGIA, PROSEGUI ALL'ISCRIZIONE//");
+                    }
                 out.println("000");
             }
             
@@ -79,22 +87,39 @@ public class Clientthread extends Thread{
       
      private void registrazioneAsta(){
         try{
-            String scelta=in.readLine();
+            String scelta;
+            if(!reRegAsta.equals("riprova")){
+            scelta=in.readLine();}else{
+                scelta="si";
+            }
             String nominativo;
         if(scelta.equals("si")){
           nominativo=in.readLine();
            Node root = server.doc.getFirstChild();
               
-            NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");
-            NodeList nodeListPartecipanti=((Element)root).getElementsByTagName("partecipanti");
-            Node nodePartecipanti=nodeListPartecipanti.item(0);
+            NodeList nodeListOggetti = ((Element)root).getElementsByTagName("oggetti");            
+            String id=trovaID();
             NodeList oggetti=((Element)nodeListOggetti.item(0)).getElementsByTagName("oggetto");
             boolean riprovo=true;
+            boolean gia_registrato=false;
             for(int i =0 ;i <oggetti.getLength();i++){
                 Element el=(Element)oggetti.item(i);
                 if(el.getAttribute("id").equals(nominativo)){
+                    NodeList tmppart =el.getElementsByTagName("utente");
+                    for(int j=0;j<tmppart.getLength();j++){
+                        Element tmp=(Element)tmppart.item(j);
+                        if(id.equals(tmp.getAttribute("id"))){
+                            gia_registrato=true;
+                            break;
+                        }
+                    }
+                    if(gia_registrato==true){
+                        break;
+                    }
+                    Node nodeOggetto=(((Element)root).getElementsByTagName("oggetto")).item(i);
+                    Node nodePartecipanti=((Element)nodeOggetto).getElementsByTagName("partecipanti").item(0);
                     Element newUtente=server.doc.createElement("utente");
-                    newUtente.setAttribute("id", trovaID());
+                    newUtente.setAttribute("id", id);
                     Element newUpdate=server.doc.createElement("update");
                     newUpdate.setTextContent("up");
                     newUtente.appendChild(newUpdate);
@@ -105,10 +130,16 @@ public class Clientthread extends Thread{
                    break;
                 }
             }
-            if(riprovo==true){
+            if(gia_registrato==true){
+                  reRegAsta="riprova";
+                  out.println("false");
+                }
+            else if(riprovo==true){
                 reRegAsta="riprova";
             out.println("false");
             }
+        }else{
+            reRegAsta="finito";
         }
         
         
